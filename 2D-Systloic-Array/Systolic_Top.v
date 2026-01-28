@@ -13,6 +13,10 @@ module Systolic_top_module #(
     input  wire [DATA_SIZE-1:0] data_in,
     input  wire data_in_valid,
 
+    input wire [DATA_SIZE-1:0] k1, k2, k3, k4,
+    input wire kernel_load_valid,
+
+
     output wire [2*DATA_SIZE+4:0] data_out,
     output wire data_out_valid,
     output img_done
@@ -39,12 +43,16 @@ module Systolic_top_module #(
 
     // ---------------- Datapath ----------------
     systolic_datapath #(DATA_SIZE, IMG_WIDTH) datapath_inst (
-        .clk(clk),
-        .rst(rst),
-        .pixel_in(data_in),
-        .w1(8'd3), .w2(8'd1), .w3(8'd7), .w4(8'd5),
-        .window_valid_out(window_valid),
-        .result_k1(data_out)
+    .clk(clk),
+    .rst(rst),
+    .pixel_in(data_in),
+
+    .w1(k1), .w2(k2), .w3(k3), .w4(k4),
+    .kernel_load_valid(kernel_load_valid),
+
+    .window_valid_out(window_valid),
+    .result_k1(data_out)
     );
+
 
 endmodule

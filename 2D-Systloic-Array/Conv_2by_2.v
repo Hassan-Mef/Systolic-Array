@@ -6,10 +6,36 @@ module Con2x2 #(
     input  wire clk,
     input  wire rst,
     input  wire [dataSize-1:0] pixel_in,
+
+    // raw kernel weights
     input  wire [dataSize-1:0] w1, w2, w3, w4,
+    input  wire kernel_load_valid,
+
     output wire window_valid_out,
     output wire [2*dataSize+4:0] result_k1
-);
+);  
+
+    // ================= KERNEL WEIGHT REGISTERS =================
+    // Loaded once before computation starts
+    reg [dataSize-1:0] w1_r, w2_r, w3_r, w4_r;
+
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            w1_r <= 0;
+            w2_r <= 0;
+            w3_r <= 0;
+            w4_r <= 0;
+        end else if (kernel_load_valid) begin
+            // Load kernel weights only when explicitly told
+            w1_r <= w1;
+            w2_r <= w2;
+            w3_r <= w3;
+            w4_r <= w4;
+        end
+    end
+
+
+
 
     // ================= LINE BUFFERS =================
     reg [dataSize-1:0] row0 [0:IMG_WIDTH-1]; // current row
