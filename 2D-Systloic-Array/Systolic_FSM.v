@@ -26,7 +26,7 @@ module systolic_FSM #(
         (IMG_HEIGHT - KERNEL_SIZE + 1);
 
     reg [PIPE_LAT-1:0] valid_pipe;
-    reg [$clog2(VALID_PER_ROW):0] row_cnt;
+    reg [(VALID_PER_ROW):0] row_cnt;
     reg [15:0] valid_out_cnt;
 
     always @(posedge clk or posedge rst) begin

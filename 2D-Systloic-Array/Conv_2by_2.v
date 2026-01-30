@@ -43,8 +43,8 @@ module Con2x2 #(
     integer i;
 
     // Counters to track filling
-    reg [$clog2(IMG_WIDTH+1)-1:0] row0_fill_cnt;
-    reg [$clog2(IMG_WIDTH+1)-1:0] row1_fill_cnt;
+    reg [(IMG_WIDTH+1)-1:0] row0_fill_cnt;
+    reg [(IMG_WIDTH+1)-1:0] row1_fill_cnt;
 
     // Window enable: latched after both rows are fully filled
     reg window_valid;
