@@ -22,6 +22,7 @@ The design is written entirely in **Verilog HDL** and targeted for **FPGA implem
 ## 📂 Repository Structure
 
 ```
+├── 1DConv   # Contains code for 1d convolution and its implementation on FPGA board
 ├── 2D-Systloic-Array/ # Core systolic array RTL (main project)
 ├── Interfacing/ # UART & button interfacing modules (experimental)
 └── README.md # This file
